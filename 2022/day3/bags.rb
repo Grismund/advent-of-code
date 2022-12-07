@@ -5,6 +5,7 @@ def compare_lines
   score_hash = Hash.new
   i = 1
 
+  # automatically creates a hash of scores for each letter.
   ("a".."z").each do |l|
     score_hash[l] = i
     i += 1
@@ -14,6 +15,10 @@ def compare_lines
     score_hash[l] = i
     i += 1
   end
+
+  # Splits each line
+  # Loops through first string looking for matches in second.
+  # If there's a match, the letter is thrown into a duplicates array.
 
   File.readlines("data.csv").each do |line|
 
@@ -30,6 +35,9 @@ def compare_lines
       end
     end
   end
+
+  # Loops through the found duplicates and checks their values against the score_hash
+  # The priorities sum is updated with each score
 
   duplicates.each do |d|
     priorities_sum += score_hash[d]
