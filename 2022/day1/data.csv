@@ -1,4 +1,4 @@
-data = "6471
+6471
 1935
 1793
 3843
@@ -2250,35 +2250,4 @@ data = "6471
 2661
 16077
 6030
-1807"
-
-
-data_split = data.split("\n")
-
-highest_total = 0
-current_calculation = 0
-totals_array = []
-
-data_split.each do |d|
-  if d == ""
-    puts "empty string"
-
-    totals_array << current_calculation
-
-    if current_calculation > highest_total
-
-      highest_total = current_calculation
-
-      current_calculation = 0
-
-    else
-      current_calculation = 0
-    end
-  else
-    current_calculation += d.to_i
-  end
-  puts "#{current_calculation} against #{highest_total}"
-end
-
-sorted_totals = totals_array.sort.reverse
-pp "The total of the top three is #{sorted_totals[0] + sorted_totals[1] + sorted_totals[2]}"
+1807
