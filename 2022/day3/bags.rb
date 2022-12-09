@@ -17,8 +17,8 @@ def compare_lines
   end
 
   # Splits each line
-  # Loops through first string looking for matches in second.
-  # If there's a match, the letter is thrown into a duplicates array.
+  # Loops through first string looking for matches in the second string.
+  # If there's a match, the letter is thrown into a duplicates array and loop breaks.
 
   File.readlines("data.csv").each do |line|
 

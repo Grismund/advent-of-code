@@ -26,49 +26,18 @@ class BagCalc
     end
   end
 
-  # def compare_lines
-  #   File.readlines("data.csv").each do |line|
-  #
-  #     line_length = line.chomp.length
-  #     line_half = line_length / 2
-  #
-  #     first_comp = line[0, line_half].split("")
-  #     second_comp = line[line_half, line.length].split("")
-  #
-  #     first_comp.each do |a|
-  #       if second_comp.include? a
-  #         @duplicates << a
-  #         break
-  #       end
-  #     end
-  #   end
-  # end
-
-  # ____________________________________________
-
   def compare_lines
     File.readlines("data.csv").each do |line|
+      rucksack = Rucksack.new(line)
 
-      determine_line_length
-
-      first_comp = line[0, line_half].split("")
-      second_comp = line[line_half, line.length].split("")
-
-      first_comp.each do |a|
-        if second_comp.include? a
-          @duplicates << a
+      rucksack.first_compartment.each do |item|
+        if rucksack.second_compartment.include? item
+          @duplicates << item
           break
         end
       end
     end
   end
-
-  def determine_line_length
-    line_length = line.chomp.length
-    line_half = line_length / 2
-  end
-
-  #________________________________________________
 
   def priorities_sum_total
     @duplicates.each do |d|
@@ -80,6 +49,25 @@ class BagCalc
     puts "This is the total: #{@priorities_sum}"
   end
 
+end
+
+class Rucksack
+  def initialize(value)
+    @value = value
+  end
+  attr_reader :value
+
+  def line_length
+    value.chomp.length
+  end
+
+  def first_compartment
+    value[0, line_length * 0.5].split("")
+  end
+
+  def second_compartment
+    value[line_length * 0.5, line_length].split("")
+  end
 end
 
 bag = BagCalc.new
