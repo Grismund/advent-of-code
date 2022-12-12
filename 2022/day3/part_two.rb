@@ -23,6 +23,7 @@ class BagCalc
     compare_three
     priorities_sum_total
     puts_total
+    puts @group_num
   end
 
   def set_score_hash
@@ -64,16 +65,9 @@ class BagCalc
       bag1.each do |item|
         if (bag2 & bag3).include? item
           @duplicates << item
-        # # if (bag2.include? item) & (bag3.include? item)
-        #
-        #   puts "Group: #{key} Bag 1 #{bag1}"
-        #   puts "Group: #{key} Bag 2 #{bag2}"
-        #   puts "Group: #{key} Bag 3 #{bag3}"
-        #   puts "Duplicate was #{item}"
+          break
         end
-        # break
       end
-      pp bags
     end
   end
 
@@ -85,6 +79,7 @@ class BagCalc
 
   def puts_total
     puts "This is the total: #{@priorities_sum}"
+    puts @duplicates.count
   end
 
 end
