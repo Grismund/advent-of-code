@@ -19,31 +19,13 @@ class Elf
       elf2_range = Range.new(elf2_start, elf2_end)
 
       if elf1_range.cover?(elf2_range) || elf2_range.cover?(elf1_range)
-        puts "Covered"
-        puts elf1_range
-        puts elf2_range
         total += 1
-      else
-        puts "Not Covered"
-        puts elf1_range
-        puts elf2_range
       end
-
-
     end
     puts total
   end
 
 end
-
-def run
-  File.readlines("data.csv").each do |line|
-    elf1 = Elf.new
-    elf2 = Elf.new
-    elf1.assignment[l] = line
-  end
-end
-
 
 elf1 = Elf.new
 elf1.assign
