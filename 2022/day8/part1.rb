@@ -1,17 +1,18 @@
 # transpose
 class TreeCounter
-    def initialize
+    def initialize(dump = "")
         @formatted_data = []
         @tree_rows = []
         @tree_columns = [[]]
         @tree_count = 0
+        @dump = dump
 
     end
 
     def run
-        # format_data
-        # tree_row_assignment
-        chomp_data
+        split_data
+        split_rows
+        pp @formatted_data
 
         # tree_row_assignment
         # puts "\n -------------------------------------------- \n#{@tree_rows}"
@@ -22,22 +23,23 @@ class TreeCounter
         # pp @tree_rows
     end
 
-    def format_data
-        chomped_data = @formatted_data
-        # pp chomped_data
-        chomped_data.each do |line|
-            line.split("\n")
+    def split_data
+        File.readlines("data.csv").each do |line|
+            split_data = line.split("\n")
+            @formatted_data << split_data
         end
-        # pp @formatted_data
     end
 
-    def chomp_data
-        File.readlines("data.csv").each do |line|
-            chomped_data = line.chomp
-            @formatted_data << chomped_data
+    def split_rows
+        @formatted_data = @formatted_data.each do |line|
+            line.each do |row|
+                row.each do |tree|
+                    tree.split("")
+                end
+            end
         end
-        pp @formatted_data
     end
+
     def tree_row_assignment
         # @tree_rows.transpose
         # pp @formatted_data
