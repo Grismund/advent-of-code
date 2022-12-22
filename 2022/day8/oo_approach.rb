@@ -23,8 +23,8 @@ class Calculator
   def calculate
     set_data
     assign_tree_properties
+    set_edges_visible
     left_to_right
-
   end
 
   def set_data
@@ -42,6 +42,17 @@ class Calculator
         tree.height = tree_height.to_i
 
         @trees_array << tree
+
+      end
+    end
+
+  end
+
+  def set_edges_visible
+    @trees_array.each do |tree|
+      # if (tree.row || tree.column) == (0 || 4)
+      if (tree.row == 0) || (tree.row == 4) || (tree.column == 0) || (tree.column == 4)
+        tree.visible = true
       end
     end
   end
@@ -51,16 +62,22 @@ class Calculator
     tallest_so_far = -1
 
     @trees_array.each do |tree|
+      selected = @trees_array.select { |other_tree|
+        other_tree.row == tree.row 
+      }
+      pp selected
+      break
 
-      tree.visible = @trees_array.any? { |other_tree| other_tree.row == tree.row and other_tree.column <= tree.column and other_tree.height < tree.height }
+    end
+
+      # .any? is a problem here because it only looks at a tree in isolation, not in the context of all the other trees on the row.
+      # tree.visible = @trees_array.any? { |other_tree| other_tree.row == tree.row and other_tree.column <= tree.column and other_tree.height < tree.height }
+
 
       # if tree.height > tallest_so_far & current_group == tree.row
       #   tree.visible = true
       #   tallest_so_far = tree.height
       # end
-    end
-    pp @trees_array
-
   end
 
   def print_things
